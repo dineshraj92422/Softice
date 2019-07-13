@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -176,11 +177,13 @@ public class SignupActivity extends AppCompatActivity {
         builder.setItems( options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
+                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                StrictMode.setVmPolicy(builder.build());
                 if (options[item].equals( "Take Photo" )) {
                     dialog.dismiss();
                     Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
                     selectedImage = Uri.fromFile( new File( Environment.getExternalStorageDirectory(),
-                            "image_" + String.valueOf( System.currentTimeMillis() ) + ".jpg" ) );
+                            "image_" + System.currentTimeMillis() + ".jpg" ) );
                     intent.putExtra( android.provider.MediaStore.EXTRA_OUTPUT, selectedImage );
                     startActivityForResult( intent, PICK_IMAGE_CAMERA );
                 } else if (options[item].equals( "Choose From Gallery" )) {
@@ -237,7 +240,7 @@ public class SignupActivity extends AppCompatActivity {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 bitmap.compress( Bitmap.CompressFormat.JPEG, 100, out );
                 Bitmap decoded = BitmapFactory.decodeStream( new ByteArrayInputStream( out.toByteArray() ) );
-                ivPhoto.setImageBitmap(bitmap);
+                ivPhoto.setImageBitmap(decoded);
             } else {
                 InputValidation.t( this, "Unable to select image" );
             }
