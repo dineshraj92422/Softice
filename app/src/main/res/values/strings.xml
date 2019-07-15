@@ -1,4 +1,8 @@
 <resources>
+    <string name="txt_no_date">No Date Selected</string>
+    <string name="txt_date_selected">Date Selected</string>
+    <string name="txt_no_time">No Time Selected</string>
+    <string name="txt_time_selected">Time Selected</string>
     <string name="app_name">Softices</string>
     <string name="f_name">First Name</string>
     <string name="l_name">Surname</string>

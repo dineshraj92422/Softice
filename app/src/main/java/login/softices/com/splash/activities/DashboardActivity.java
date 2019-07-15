@@ -1,5 +1,6 @@
 package login.softices.com.splash.activities;
 
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -97,6 +98,14 @@ public class DashboardActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_Contacts) {
             Intent intent = new Intent( DashboardActivity.this, ContactActivity.class );
+            startActivity( intent );
+
+        }else if (id == R.id.nav_Dialogs) {
+            Intent intent = new Intent( DashboardActivity.this, DialogBoxActivity.class );
+            startActivity( intent );
+
+        }else if (id == R.id.nav_Service) {
+            Intent intent = new Intent( DashboardActivity.this, Services.class );
             startActivity( intent );
         }
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );

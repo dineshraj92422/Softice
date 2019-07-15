@@ -24,6 +24,15 @@
             android:id="@+id/nav_Contacts"
             android:title="Contacts" />
 
+        <item
+            android:id="@+id/nav_Dialogs"
+            android:title="Dialogs Box" />
+
+        <item
+            android:id="@+id/nav_Service"
+            android:title="Services" />
+
+
 
 
 
