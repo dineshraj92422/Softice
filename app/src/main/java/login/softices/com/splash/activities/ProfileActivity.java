@@ -95,12 +95,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         ivphoto = findViewById(R.id.iv_photo);
-        ivphoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onOpenImage();
-            }
-        });
+        ivphoto.setOnClickListener(v -> onOpenImage());
 
     }
 
@@ -153,26 +148,23 @@ public class ProfileActivity extends AppCompatActivity {
         final CharSequence[] options = {"Take Photo", "Choose From Gallery", "Cancel"};
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle("Select Option");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    dialog.dismiss();
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    selectedImage = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-                            "image_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
-                    intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, selectedImage);
-                    startActivityForResult(intent, PICK_IMAGE_CAMERA);
-                } else if (options[item].equals("Choose From Gallery")) {
-                    dialog.dismiss();
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    pickPhoto.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(pickPhoto, "Compelete action using"),
-                            PICK_IMAGE_GALLERY);
-                } else if (options[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Take Photo")) {
+                dialog.dismiss();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                selectedImage = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                        "image_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, selectedImage);
+                startActivityForResult(intent, PICK_IMAGE_CAMERA);
+            } else if (options[item].equals("Choose From Gallery")) {
+                dialog.dismiss();
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickPhoto.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(pickPhoto, "Compelete action using"),
+                        PICK_IMAGE_GALLERY);
+            } else if (options[item].equals("Cancel")) {
+                dialog.dismiss();
             }
         });
         builder.show();

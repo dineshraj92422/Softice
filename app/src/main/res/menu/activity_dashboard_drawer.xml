@@ -20,6 +20,11 @@
             android:id="@+id/nav_Users"
             android:title="Users" />
 
+        <item
+            android:id="@+id/nav_Contacts"
+            android:title="Contacts" />
+
+
 
 
     </group>

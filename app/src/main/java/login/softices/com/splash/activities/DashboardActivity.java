@@ -94,6 +94,10 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_Users) {
             Intent intent = new Intent( DashboardActivity.this, UserListActivity.class );
             startActivity( intent );
+
+        } else if (id == R.id.nav_Contacts) {
+            Intent intent = new Intent( DashboardActivity.this, ContactActivity.class );
+            startActivity( intent );
         }
         DrawerLayout drawer = (DrawerLayout) findViewById( R.id.drawer_layout );
         drawer.closeDrawer( GravityCompat.START );
